@@ -10,11 +10,12 @@ Construção de um mecanismo de busca utilizando **Lógica de Primeira Ordem** (
 
 ```
 .
-├── etl.py          # Script Python: lê o CSV e gera base.pl
-├── base.pl         # Base de conhecimento gerada (fatos Prolog)
-├── queries.pl      # Regras (sentenças) que respondem as 3 perguntas
-├── fifa_data.csv   # Dataset original (Kaggle - não versionado)
-└── README.md       # Este arquivo
+├── etl.py             # Script Python: lê o CSV e gera base.pl
+├── base.pl            # Base de conhecimento gerada (600 fatos Prolog)
+├── queries.pl         # Regras (sentenças) que respondem as 3 perguntas
+├── players_22.csv     # Dataset original do Kaggle (FIFA 22)
+├── requirements.txt   # Dependências Python
+└── README.md          # Este arquivo
 ```
 
 ---
@@ -44,11 +45,11 @@ Foram mantidos os **600 jogadores com maior overall** para manter a base trabalh
 
 ### 1. Gerar a base de conhecimento
 
-Baixe o CSV do Kaggle, salve como `fifa_data.csv` na raiz do projeto, e execute:
+O `players_22.csv` já está incluído no repositório. Para gerar/regenerar a base:
 
 ```bash
 pip install pandas
-python etl.py fifa_data.csv
+python etl.py players_22.csv
 ```
 
 Isso gera o arquivo `base.pl` com fatos no formato:
@@ -280,7 +281,7 @@ Esta seção documenta os resultados obtidos rodando as 3 queries no [SWISH](htt
 
 ---
 
-## 🐛 Erros comuns que evitamos
+## Erros comuns que evitei
 
 - ✅ Maiúsculas/minúsculas — todas constantes em minúsculo
 - ✅ Ponto final em todas as cláusulas
@@ -289,6 +290,6 @@ Esta seção documenta os resultados obtidos rodando as 3 queries no [SWISH](htt
 
 ---
 
-## 📝 Murilo Zezza Godoy
+## 📝 Autor - Murilo Zezza Godoy
 
 Projeto individual para Lógica e Matemática Discreta — Insper 2026/1.
