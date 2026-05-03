@@ -166,6 +166,111 @@ Conforme a rubrica do projeto:
 
 ---
 
+## 🎯 Exemplos de execução (resultados reais)
+
+Esta seção documenta os resultados obtidos rodando as 3 queries no [SWISH](https://swish.swi-prolog.org/) com a base gerada a partir do `players_22.csv` do FIFA 22.
+
+### ▶️ Pergunta 1 — Top 10 clubes mais valiosos
+
+**Query:**
+```prolog
+?- ranking_clubes(R).
+```
+
+**Resultado (top 10 de 124 clubes retornados):**
+```
+1.  manchester_city      EUR 1.257.500.000
+2.  paris_saint_germain  EUR 1.131.000.000
+3.  liverpool            EUR   962.500.000
+4.  manchester_united    EUR   926.500.000
+5.  atletico_de_madrid   EUR   900.500.000
+6.  fc_bayern_munchen    EUR   880.000.000
+7.  chelsea              EUR   866.500.000
+8.  real_madrid_cf       EUR   842.500.000
+9.  fc_barcelona         EUR   689.500.000
+10. juventus             EUR   663.500.000
+```
+
+✅ Resultado coerente com a realidade do futebol europeu em 2022.
+
+---
+
+### ▶️ Pergunta 2 — Top 10 joias (jovens promissores)
+
+**Query:**
+```prolog
+?- ranking_joias(R).
+```
+
+**Resultado (top 10 de 44 joias encontradas):**
+```
+1.  vinicius_jr      (real_madrid_cf)     potencial +10
+2.  pedri            (fc_barcelona)       potencial +10
+3.  a_bastoni        (inter)              potencial +9
+4.  p_foden          (manchester_city)    potencial +8
+5.  k_havertz        (chelsea)            potencial +8
+6.  joao_felix       (atletico_de_madrid) potencial +8
+7.  ferran_torres    (manchester_city)    potencial +8
+8.  f_chiesa         (juventus)           potencial +8
+9.  d_upamecano      (fc_bayern_munchen)  potencial +8
+10. b_saka           (arsenal)            potencial +8
+```
+
+✅ Outras joias encontradas: Haaland, Mount, Ødegaard, Alexander-Arnold, De Ligt, Pulisic, Lucas Paquetá, Osimhen, Davies, Valverde — todos jovens promessas reais que se confirmaram nos anos seguintes.
+
+---
+
+### ▶️ Pergunta 3 — Top 10 países por overall médio
+
+**Query:**
+```prolog
+?- ranking_paises(R).
+```
+
+**Resultado (top 10 de 23 países com ≥ 5 jogadores):**
+```
+1.  poland       overall medio: 83.67
+2.  belgium      overall medio: 83.56
+3.  germany      overall medio: 82.76
+4.  netherlands  overall medio: 82.42
+5.  croatia      overall medio: 82.40
+6.  brazil       overall medio: 82.30
+7.  england      overall medio: 82.29
+8.  argentina    overall medio: 82.28
+9.  portugal     overall medio: 82.25
+10. uruguay      overall medio: 82.09
+```
+
+✅ O filtro de mínimo 5 jogadores foi essencial: sem ele, países com 1 ou 2 craques top dominariam o ranking. Com o filtro, apenas países com elenco *consistentemente* forte aparecem.
+
+---
+
+## 🧪 Como reproduzir os resultados acima
+
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/murilozgodoy/FifaPlayersKaggle.git
+   cd FifaPlayersKaggle
+   ```
+2. Instale a dependência Python:
+   ```bash
+   pip install pandas
+   ```
+3. (Opcional) Regenere a base a partir do CSV:
+   ```bash
+   python etl.py players_22.csv
+   ```
+   *Como o `base.pl` já está versionado no repositório, este passo é opcional.*
+4. Acesse https://swish.swi-prolog.org/ e clique em **Program**
+5. Cole o conteúdo de `base.pl` seguido do conteúdo de `queries.pl` na área **Program**
+6. Na área **Query**, execute:
+   - `ranking_clubes(R).`
+   - `ranking_joias(R).`
+   - `ranking_paises(R).`
+7. Clique em **Run!** após cada query
+
+---
+
 ## ⚙️ Decisões de modelagem
 
 - **Normalização agressiva de strings:** Prolog exige átomos minúsculos sem acentos/espaços. O ETL converte `"Atlético Madrid"` → `atletico_madrid`, `"Müller"` → `muller`, etc.
@@ -184,6 +289,6 @@ Conforme a rubrica do projeto:
 
 ---
 
-## 📝 Autor
+## 📝 Murilo Zezza Godoy
 
 Projeto individual para Lógica e Matemática Discreta — Insper 2026/1.
